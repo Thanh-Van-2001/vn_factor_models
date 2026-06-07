@@ -4,6 +4,19 @@ Replication of factor models for Vietnamese stock market based on:
 - **Reference report**: `Factor_Models_Vietnam_Report_EN.docx` (May 2026, BeeTrade)
 - **Primary source**: Huang, Liu, Shu (2023), "Factors and anomalies in the Vietnamese stock market", Pacific-Basin Finance Journal Vol. 82.
 
+## ▶ Cross-sectional factor-library experiment (NEW)
+
+An end-to-end empirical test of the **30-factor BeeTrade library**
+(`docs/Vietnam_Equity_Factor_Library_Bee.pdf`) on live vnstock data — 20 factors across 5 families,
+sector/size-neutralised, evaluated by rank IC / quintile spread / decay / net-of-cost, with a
+GLM-4.6 (z.ai) claim-by-claim verdict. **See [`docs/EXPERIMENTS.md`](EXPERIMENTS.md).**
+
+Headline: **Value is the one robust premium** (composite IC t=2.81, monotonic, +22.6%/yr);
+**low IVOL** also significant (t=2.40); momentum/size/illiquidity weak or inverted — broadly
+matching the report, except short-term *reversal* and *operating-profitability* do **not** dominate
+at a monthly, cost-aware cadence. Pipeline: `src/fetch_data.py`, `src/fetch_fund.py`,
+`src/factors.py`, `src/evaluate.py`, `src/zai_review.py`.
+
 ## VN-4 Model (recommended specification)
 
 ```
@@ -105,5 +118,10 @@ python src/compare_models.py
 ## Status
 
 - 2026-05-06: repo scaffolded
-- TODO: implement scripts, run replication, validate against Huang 2023 target premia
-- TODO: extend to 2025-2026 sample (post-KRX, post-FTSE upgrade if happens)
+- 2026-06-07: implemented the cross-sectional factor-library experiment on live vnstock data
+  (VN100+HNX30, 2018–2026), with sector/size-neutral scores, the §3.4 evaluation protocol, a
+  multi-factor composite, and a GLM-4.6 (z.ai) verdict vs the report — see
+  [`docs/EXPERIMENTS.md`](EXPERIMENTS.md). Key result: Value robust; momentum/size/illiquidity weak.
+- TODO: quarterly PIT fundamentals (paid data tier) to lengthen the Value/Quality window
+- TODO: weekly, cost-aware short-term-reversal sleeve (the report's reversal claim is a 1-month effect)
+- TODO: extend to the full HOSE cross-section; add foreign-flow factors (F1/F4) post-FTSE upgrade

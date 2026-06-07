@@ -5,3 +5,6 @@ data/
 .venv/
 venv/
 .env
+
+# fetch logs
+*.log
